@@ -1,0 +1,23 @@
+---
+
+- include_vars: ../vars/main.yml
+
+- name: copy endgame files to target
+  copy: src={{ item.src }} dest=/tmp/{{ item.dest }} mode=0770
+  with_items:
+    - { src: "{{ endgame_installer }}", dest: "{{ endgame_installer }}" }
+    - { src: "{{ endgame_config }}", dest: "{{ endgame_config }}" }
+  when: endgame_installer_s3_url == ""
+    
+- name: Download from s3 bucket when endgame_installer_s3_url is set
+  get_url: url={{ item.url }} dest={{ item.dest }} mode=0770
+  with_items:
+    - "{ url: {{ endgame_installer_s3_url }}, dest: /tmp/{{ endgame_installer }} }"
+    - "{ url: {{ endgame_config_s3_url }}, dest: /tmp/{{ endgame_config }} }"
+  when: endgame_installer_s3_url != ""    
+    
+- name: run endgame installer
+  shell: /tmp/{{ endgame_installer }} -k {{ endgame_apikey }} -c /tmp/{{ endgame_config }}
+  become: yes
+  args:
+    creates: /usr/sbin/esensor
