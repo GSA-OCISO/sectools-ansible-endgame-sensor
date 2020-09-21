@@ -1,0 +1,11 @@
+---
+
+endgame_apikey: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          123123123123123123123123123123123123123123
+          123123123123123123123123123123123123123123
+          123123123123123123123123123123123123123123
+endgame_installer: "SensorLinuxInstaller-Linux-Deployment"
+endgame_config: "SensorLinuxInstaller-Linux-Deployment.cfg"
+endgame_installer_s3_url: ""
+endgame_config_s3_url: ""
