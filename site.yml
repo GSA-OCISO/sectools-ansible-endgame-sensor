@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  vars:
+    ansible_user: ubuntu
+    ansible_become: yes
+  gather_facts: False
+  connection: paramiko
+  
+  tasks:
+  - name: install python 2
+    raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
+ 
+- hosts: all
+  vars:
+    ansible_user: ubuntu
+    ansible_become: yes
+  gather_facts: True
+  connection: paramiko
+  tasks:
+  - import_tasks: tasks/main.yml
