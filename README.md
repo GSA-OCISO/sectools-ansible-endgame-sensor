@@ -14,7 +14,7 @@ then...
 
 1. Endgame sensor installer package (endgame_installer) 
 2. Endgame sensor configuration file (endgame_config)
-3. API key to register with Endgame management server (endgame_apikey)
+3. API key to register with Endgame management server (endgame_apikey via ansible-vault)
 
 Edit the vars/main.yml to reflect values of variables:
 
